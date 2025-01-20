@@ -1,11 +1,47 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { SignIn } from "auth-astro/components";
+import Layout from "src/layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+//icons
+import LoginGoogle from "../components/loginout/LoginGoogle.astro";
 ---
 
+<style>
+  .icon {
+    margin: 0 auto;
+    transform: scale(0.5);
+  }
+</style>
 <Layout>
-	<Welcome />
+  <main
+    style="max-width: 640px;"
+    class="flex flex-col h-screen max-h-screen mx-auto border shadow-lg bg-gray-500"
+  >
+    <div>
+      <h1>Esta es una pagina de pruebas</h1>
+    </div>
+
+    <div class="bg-gray-800 h-full rounded-t-2xl px-8">
+      <form action="" class="flex flex-col gap-4">
+        <input
+          placeholder="Email"
+          type="text"
+          class="h-10 rounded-lg"
+          disabled
+        />
+        <input
+          placeholder="Contraseña"
+          type="password"
+          class="h-10 rounded-lg"
+          disabled
+        />
+        <button
+          class="min-h-10 max-h-10 w-full border rounded-full bg-white px-3 py-2 flex flex-row items-center justify-center"
+        >
+          <span class="font-bold">Iniciar Sesión con Correo</span>
+        </button>
+      </form>
+      <LoginGoogle />
+    </div>
+  </main>
 </Layout>

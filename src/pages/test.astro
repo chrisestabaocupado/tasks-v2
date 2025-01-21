@@ -1,7 +1,14 @@
 ---
-import Layout from "src/layouts/Layout.astro";
+import { SignIn, SignOut } from "auth-astro/components";
+import { getSession } from "auth-astro/server";
+const session = await getSession(Astro.request);
+/* console.log(Astro.request) */
 ---
 
-<Layout>
-  <h1>Esta es una pagina de pruebas</h1>
-</Layout>
+{
+    session?
+        <p>Hola! {session.user?.email}</p>
+        <SignOut>Salir</SignOut>
+    :
+    <SignIn provider="google">Iniciar con Google</SignIn>
+}

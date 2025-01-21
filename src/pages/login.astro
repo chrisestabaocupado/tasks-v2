@@ -1,14 +1,52 @@
 ---
-import { SignIn, SignOut } from "auth-astro/components";
+import Layout from "src/layouts/Layout.astro";
+import LoginMailForm from "src/components/loginout/LoginMailForm.astro";
+import LoginGoogleButton from "src/components/loginout/LoginGoogleButton.astro";
+// session
 import { getSession } from "auth-astro/server";
 const session = await getSession(Astro.request);
-/* console.log(Astro.request) */
 ---
 
-{
-    session?
-        <p>Hola! {session.user?.email}</p>
-        <SignOut>Salir</SignOut>
-    :
-    <SignIn provider="google">Iniciar con Google</SignIn>
-}
+<Layout>
+  <main
+    style="max-width: 640px;background-color:#17181C;"
+    class="flex flex-col h-screen max-h-screen mx-auto border shadow-lg overflow-hidden"
+  >
+    <div class="h-full px-8 py-6">
+      <h1 class="text-6xl text-gray-50 pacifico-regular">
+        Bienvenido a habits.ch
+      </h1>
+    </div>
+
+    <div
+      style="background-color:#25262B;"
+      class="max-h-fit flex flex-col justify-between gap-4 rounded-t-3xl px-8 py-12"
+    >
+      <h1 class="text-gray-400 font-bold text-3xl">Inicia sesión</h1>
+      <LoginMailForm />
+
+      <a
+        class="ml-auto text-bold text-gray-500 underline cursor-not-allowed"
+        href="#">He olvidado mi contraseña.</a
+      >
+
+      <div class="flex flex-col gap-4">
+        <button
+          style="background-color: #4B5DF8;"
+          class="h-14 w-full text-white rounded-full py-3 flex flex-row items-center justify-center cursor-not-allowed"
+          disabled
+        >
+          <span class="text-lg">Iniciar Sesión</span>
+        </button>
+        <LoginGoogleButton />
+      </div>
+    </div>
+    {
+        session ? <script>
+            setTimeout(() => {
+            window.location.href = '/';
+            }, 1000);
+        </script> : <span></span>
+    }
+  </main>
+</Layout>

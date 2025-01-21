@@ -1,43 +1,68 @@
 ---
-import { SignIn } from "auth-astro/components";
 import Layout from "src/layouts/Layout.astro";
-import LoginMailForm from "src/components/loginout/LoginMailForm.astro";
-import LoginGoogleButton from "src/components/loginout/LoginGoogleButton.astro";
+
+const tasks = [
+  { id: 1, title: "Task 1", completed: false },
+  { id: 2, title: "Task 2", completed: true },
+  { id: 3, title: "Task 3", completed: false },
+];
+
+import { getSession } from "auth-astro/server";
+import { userInfo } from "os";
+const session = await getSession(Astro.request);
+console.log(session);
 ---
 
 <Layout>
   <main
     style="max-width: 640px;background-color:#17181C;"
-    class="flex flex-col h-screen max-h-screen mx-auto border shadow-lg overflow-hidden"
+    class="flex flex-col h-screen max-h-screen py-6 px-8 mx-auto border shadow-lg overflow-hidden"
   >
-    <div class="h-full px-8 py-6">
-      <h1 class="text-6xl text-gray-50 pacifico-regular">
-        Bienvenido a habits.ch
-      </h1>
+    <div class="flex flex-col gap-4 my-auto">
+      {
+        tasks.map((task) => (
+          <div
+            style="background-color:#25262B;"
+            class="max-h-fit flex flex-row justify-between gap-4 rounded-3xl p-6 hover:shadow-xl transition-shadow duration-500 ease-in-out"
+          >
+            <button class="w-fit ">
+              <i class="ti ti-circle text-2xl text-white hover:text-green-400 transition-colors ease-in-out duration-100" />
+            </button>
+            <div class="w-full">
+              <h1 class="text-gray-300 text-lg">{task.title}</h1>
+            </div>
+          </div>
+        ))
+      }
     </div>
-
-    <div
-      style="background-color:#25262B;"
-      class="max-h-fit flex flex-col justify-between gap-4 rounded-t-3xl px-8 py-12"
-    >
-      <h1 class="text-gray-400 font-bold text-3xl">Inicia sesión</h1>
-      <LoginMailForm />
-
-      <a
-        class="ml-auto text-bold text-gray-500 underline cursor-not-allowed"
-        href="#">He olvidado mi contraseña.</a
-      >
-
-      <div class="flex flex-col gap-4">
-        <button
-          style="background-color: #4B5DF8;"
-          class="h-14 w-full text-white rounded-full py-3 flex flex-row items-center justify-center cursor-not-allowed"
-          disabled
-        >
-          <span class="text-lg">Iniciar Sesión</span>
-        </button>
-        <LoginGoogleButton />
-      </div>
-    </div>
+    <footer class="flex flex-col h-fit">
+      {
+        session ? 
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row gap-4 items-center h-fit">
+              <img class="h-14 w-14 rounded-full" src={session.user?.image} alt="User Profile Pic">
+              <p class="text-gray-300">Hola! {session.user?.name}</p>
+            </div>
+            <div class="flex flex-row gap-4">
+              <button>
+                <i class="ti ti-circle-plus text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100"></i>
+              </button>
+              <button>
+                <i class="ti ti-settings text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100"></i>
+              </button>
+            </div>
+          </div>
+        :
+          <span></span>
+      }
+    </footer>
+    {
+      session ? <span></span> :
+        <script>
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 1000);
+        </script>
+    }
   </main>
 </Layout>

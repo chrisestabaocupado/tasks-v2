@@ -1,0 +1,13 @@
+---
+import { SignIn } from "auth-astro/components";
+//icons
+import Google from "../../assets/GoogleBrand.astro";
+---
+
+<SignIn
+  class="h-16 w-full border rounded-full bg-white px-3 py-2 flex flex-row items-center justify-center gap-2"
+  provider="google"
+>
+  <img src="/src/assets/GLogo.png" class="flex max-w-6" />
+  <span class="font-bold text-lg">Inciar sesion con Google</span>
+</SignIn>

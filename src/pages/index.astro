@@ -8,10 +8,12 @@ import LoginGoogleButton from "src/components/loginout/LoginGoogleButton.astro";
 <Layout>
   <main
     style="max-width: 640px;background-color:#17181C;"
-    class="flex flex-col h-screen max-h-screen mx-auto border shadow-lg"
+    class="flex flex-col h-screen max-h-screen mx-auto border shadow-lg overflow-hidden"
   >
     <div class="h-full px-8 py-6">
-      <h1 class="text-6xl text-gray-50">Bienvenido a habits.ch</h1>
+      <h1 class="text-6xl text-gray-50 pacifico-regular">
+        Bienvenido a habits.ch
+      </h1>
     </div>
 
     <div
@@ -29,10 +31,10 @@ import LoginGoogleButton from "src/components/loginout/LoginGoogleButton.astro";
       <div class="flex flex-col gap-4">
         <button
           style="background-color: #4B5DF8;"
-          class="h-16 w-full text-white rounded-full px-3 py-2 flex flex-row items-center justify-center cursor-not-allowed"
+          class="h-14 w-full text-white rounded-full py-3 flex flex-row items-center justify-center cursor-not-allowed"
           disabled
         >
-          <span class="font-bold text-lg">Iniciar Sesión</span>
+          <span class="text-lg">Iniciar Sesión</span>
         </button>
         <LoginGoogleButton />
       </div>

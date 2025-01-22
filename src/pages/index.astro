@@ -6,15 +6,20 @@ const tasks = [
   { id: 1, title: "Task 1", completed: false },
   { id: 2, title: "Task 2", completed: true },
   { id: 3, title: "Task 3", completed: false },
+  { id: 4, title: "Task 4", completed: true },
+  { id: 5, title: "Task 5", completed: false },
+  { id: 6, title: "Task 6", completed: true },
+  { id: 7, title: "Task 7", completed: false },
+  { id: 8, title: "Task 8", completed: true },
 ];
 ---
 
 <Layout>
   <main
     style="max-width: 640px;background-color:#17181C;"
-    class="flex flex-col h-screen max-h-screen py-6 px-8 mx-auto border shadow-lg overflow-hidden"
+    class="flex flex-col min-h-screen py-6 px-8 mx-auto border shadow-lg"
   >
-    <div class="flex flex-col gap-4 my-auto">
+    <div class="flex flex-col gap-4 my-auto max-h-screen overflow-y-scroll">
       {
         tasks.map((task) => (
           <div
@@ -31,7 +36,6 @@ const tasks = [
         ))
       }
     </div>
-
     <Footer />
     <Modal />
   </main>

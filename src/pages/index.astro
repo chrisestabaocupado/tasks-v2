@@ -1,16 +1,12 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-
+import Footer from "src/components/settings/Footer.astro";
+import Modal from "src/components/settings/Modal.astro";
 const tasks = [
   { id: 1, title: "Task 1", completed: false },
   { id: 2, title: "Task 2", completed: true },
   { id: 3, title: "Task 3", completed: false },
 ];
-
-import { getSession } from "auth-astro/server";
-import { userInfo } from "os";
-const session = await getSession(Astro.request);
-console.log(session);
 ---
 
 <Layout>
@@ -25,7 +21,7 @@ console.log(session);
             style="background-color:#25262B;"
             class="max-h-fit flex flex-row justify-between gap-4 rounded-3xl p-6 hover:shadow-xl transition-shadow duration-500 ease-in-out"
           >
-            <button class="w-fit ">
+            <button class="w-fit">
               <i class="ti ti-circle text-2xl text-white hover:text-green-400 transition-colors ease-in-out duration-100" />
             </button>
             <div class="w-full">
@@ -35,34 +31,8 @@ console.log(session);
         ))
       }
     </div>
-    <footer class="flex flex-col h-fit">
-      {
-        session ? 
-          <div class="flex flex-row justify-between items-center">
-            <div class="flex flex-row gap-4 items-center h-fit">
-              <img class="h-14 w-14 rounded-full" src={session.user?.image} alt="User Profile Pic">
-              <p class="text-gray-300">Hola! {session.user?.name}</p>
-            </div>
-            <div class="flex flex-row gap-4">
-              <button>
-                <i class="ti ti-circle-plus text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100"></i>
-              </button>
-              <button>
-                <i class="ti ti-settings text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100"></i>
-              </button>
-            </div>
-          </div>
-        :
-          <span></span>
-      }
-    </footer>
-    {
-      session ? <span></span> :
-        <script>
-          setTimeout(() => {
-            window.location.href = '/login';
-          }, 1000);
-        </script>
-    }
+
+    <Footer />
+    <Modal />
   </main>
 </Layout>

@@ -1,0 +1,46 @@
+---
+import { SignOut } from "auth-astro/components";
+---
+
+<div
+  id="modalSettings"
+  class="hidden fixed inset-0 bg-black bg-opacity-50 justify-center items-center z-50 w-screen px-8"
+>
+  <div
+    style="background-color:#25262B;"
+    class="flex flex-col gap-4 border border-gray-700 p-6 rounded-lg shadow-lg w-full text-gray-300"
+  >
+    <div class="w-full flex flex-row justify-between items-center">
+      <h2 class="font-bold text-lg">Gracias por probar Habits!</h2>
+      <button class="modalToggler">
+        <i class="ti ti-x text-3xl"></i>
+      </button>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <p class="text-justify italic">
+        Gracias por probar nuestra aplicación. Esperamos recibir sus <a
+          class="underline hover:text-gray-100 transition duration-500 ease-in-out font-bold"
+          href="#">comentarios</a
+        > para seguir mejorando.
+        <br /><b>-Chris <i class="ti ti-heart"></i></b>
+      </p>
+      <SignOut
+        class="w-full bg-indigo-500 hover:bg-indigo-400 text-white transition-colors ease-linear duration-100 rounded-lg shadows py-4"
+      >
+        <span>Cerrar Sesión</span>
+      </SignOut>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("modalSettings");
+  const buttons = document.getElementsByClassName("modalToggler");
+  Array.from(buttons).forEach((button) => {
+    button.addEventListener("click", () => {
+      modal?.classList.toggle("flex");
+      modal?.classList.toggle("hidden");
+    });
+  });
+</script>

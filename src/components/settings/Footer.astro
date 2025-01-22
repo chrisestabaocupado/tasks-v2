@@ -1,0 +1,41 @@
+---
+import { getSession } from "auth-astro/server";
+const session = await getSession(Astro.request);
+console.log(session);
+---
+
+<footer class="flex flex-col h-fit">
+  {
+    session ? (
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row gap-4 items-center h-fit">
+          <img
+            class="h-14 w-14 rounded-full"
+            src={session.user?.image}
+            alt="User Profile Pic"
+          />
+          <p class="text-gray-300">Hola! {session.user?.name}</p>
+        </div>
+        <div class="flex flex-row gap-4">
+          <button>
+            <i class="ti ti-circle-plus text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100" />
+          </button>
+          <button class="modalToggler">
+            <i class="ti ti-settings text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100" />
+          </button>
+        </div>
+      </div>
+    ) : (
+      <span />
+    )
+  }
+</footer>
+
+{
+    session ? <span></span> :
+      <script>
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 1000);
+      </script>
+}

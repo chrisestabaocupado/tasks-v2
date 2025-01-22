@@ -14,13 +14,13 @@ console.log(session);
             src={session.user?.image}
             alt="User Profile Pic"
           />
-          <p class="text-gray-300">Hola! {session.user?.name}</p>
+          <p class="text-gray-300">{session.user?.name}</p>
         </div>
         <div class="flex flex-row gap-4">
           <button>
             <i class="ti ti-circle-plus text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100" />
           </button>
-          <button class="modalToggler">
+          <button class="modalSettingsToggler">
             <i class="ti ti-settings text-3xl text-gray-300 hover:text-gray-400 transition-colors ease-in-out duration-100" />
           </button>
         </div>

@@ -6,14 +6,19 @@ import LoginGoogleButton from "src/components/loginout/LoginGoogleButton.astro";
 import { getSession } from "auth-astro/server";
 const session = await getSession(Astro.request);
 ---
-
+<style>
+.background {
+  background-image: url("/assets/backgrounds/bg.png");
+  background-repeat: repeat;
+}
+</style>
 <Layout>
   <main
     style="max-width: 640px;background-color:#17181C;"
     class="flex flex-col h-screen max-h-screen mx-auto border shadow-lg overflow-hidden"
   >
-    <div class="h-full px-8 py-6">
-      <h1 class="text-6xl text-gray-50 pacifico-regular">
+    <div class="background h-full px-8 py-6">
+      <h1 class="text-6xl text-gray-50 opacity-100">
         Bienvenido a habits.ch
       </h1>
     </div>

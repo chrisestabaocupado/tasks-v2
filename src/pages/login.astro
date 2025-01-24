@@ -30,17 +30,12 @@ const session = await getSession(Astro.request);
       <h1 class="text-gray-400 font-bold text-3xl">Inicia sesión</h1>
       <LoginMailForm />
 
-      <a
-        class="ml-auto text-bold text-gray-500 underline cursor-not-allowed"
-        href="#">He olvidado mi contraseña.</a
-      >
-
       <div class="flex flex-col gap-4">
         <button
           class="h-14 w-full bg-indigo-500 hover:bg-indigo-400 text-white rounded-full py-3 flex flex-row items-center justify-center cursor-not-allowed"
           disabled
         >
-          <span class="text-lg">Iniciar Sesión</span>
+          <span class="text-lg">Iniciar sesión</span>
         </button>
         <LoginGoogleButton />
       </div>

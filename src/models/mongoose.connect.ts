@@ -1,22 +1,14 @@
 import mongoose from "mongoose";
 
-/* const usuarioSchema = new mongoose.Schema(
-  {},
-  { collection: "usuarios", strict: false }
-);
-const Usuario = mongoose.model("Usuario", usuarioSchema);
-const usuarios = await Usuario.find({});
-console.log("Documentos encontrados:", usuarios); */
-
-// Conectando a MongoDB
-const uri = process.env.MONGODB_URI || "";
+// Función para inicializar la conexión
 export const initializeMongo = async () => {
+  const uri = process.env.MONGODB_URI || "";
+  console.log(uri);
   try {
-    // Conectar a MongoDB
-    await mongoose.connect(uri).then(() => {
-      console.log("Conexión exitosa a MongoDB con Mongoose");
+    await mongoose.connect("mongodb://172.30.32.1:27017/pruebas").then(() => {
+      console.log("Conexión exitosa a MongoDB");
     });
   } catch (error) {
-    console.error("Error al conectar o consultar:", error);
+    console.error("Error al conectar a MongoDB:", error);
   }
 };

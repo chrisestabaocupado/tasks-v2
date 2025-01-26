@@ -11,23 +11,29 @@ export const GET: APIRoute = async ({ url, request }) => {
   // date handling
   let start_date: any = url.searchParams.get("start_date");
   let end_date: any = url.searchParams.get("end_date");
-  start_date = new Date(start_date);
-  end_date = new Date(
-    add(start_date, { days: 1, hours: 23, minutes: 59, seconds: 59 })
-  );
-  const created_at = { $gte: start_date, $lt: end_date };
+  let created_at = undefined;
+  if (start_date && end_date) {
+    start_date = new Date(start_date);
+    end_date = new Date(
+      add(start_date, { days: 1, hours: 23, minutes: 59, seconds: 59 })
+    );
+    created_at = { $gte: start_date, $lt: end_date };
+  }
   // query object
   const obj = deleteUndefinedProperties({
     _id,
     user_mail,
     created_at,
   });
+
+  console.log(obj);
   // if no parameters are passed
   switch (Object.keys(obj).length === 0) {
     case true:
       return new Response(
         JSON.stringify({
-          message: "Missing parameters",
+          sucess: false,
+          message: "Missing parameters!",
         }),
         { status: 400 }
       );
@@ -39,14 +45,16 @@ export const GET: APIRoute = async ({ url, request }) => {
             const result = await get(habits_model, obj);
             return new Response(
               JSON.stringify({
-                message: "Listo!",
-                success: result,
+                sucess: true,
+                message: "Data retrieved",
+                result: result,
               }),
               { status: 200 }
             );
           } catch (error) {
             return new Response(
               JSON.stringify({
+                sucess: false,
                 message: "Error while getting data",
                 error: error,
               }),
@@ -59,14 +67,16 @@ export const GET: APIRoute = async ({ url, request }) => {
             const result = await getOne(habits_model, obj);
             return new Response(
               JSON.stringify({
-                message: "Listo!",
-                success: result,
+                sucess: true,
+                message: "Data retrieved",
+                result: result,
               }),
               { status: 200 }
             );
           } catch (error) {
             return new Response(
               JSON.stringify({
+                sucess: false,
                 message: "Error while getting data",
                 error: error,
               }),

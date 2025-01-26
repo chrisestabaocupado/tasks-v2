@@ -3,6 +3,11 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "ES6",
+    "strictPropertyInitialization": false,
+    "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
       "auth:config": ["astro.config.mjs"] // Asegúrate de que esta ruta esté correctamente configurada

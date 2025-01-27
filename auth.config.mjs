@@ -10,7 +10,7 @@ export default defineConfig({
     }),
   ],
   cookies: {
-    secure: true, // Usa HTTPS
+    secure: false, // Usa HTTPS
     httpOnly: true, // Protege las cookies de accesos desde JavaScript
     sameSite: "strict", // Previene ataques CSRF
   },

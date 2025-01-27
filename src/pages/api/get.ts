@@ -25,8 +25,6 @@ export const GET: APIRoute = async ({ url, request }) => {
     user_mail,
     created_at,
   });
-
-  console.log(obj);
   // if no parameters are passed
   switch (Object.keys(obj).length === 0) {
     case true:

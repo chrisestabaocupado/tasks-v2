@@ -2,16 +2,22 @@
 import Layout from "src/layouts/Layout.astro";
 import Footer from "src/components/settings/Footer.astro";
 import Modal from "src/components/settings/Modal.astro";
-const tasks = [
-  { id: 1, title: "Task 1", completed: false },
-  { id: 2, title: "Task 2", completed: true },
-  { id: 3, title: "Task 3", completed: false },
-  { id: 4, title: "Task 4", completed: true },
-  /*{ id: 5, title: "Task 5", completed: false },
-  { id: 6, title: "Task 6", completed: true },
-  { id: 7, title: "Task 7", completed: false },
-  { id: 8, title: "Task 8", completed: true },*/
-];
+let tasks: any = await fetch(
+  "http://localhost:4321/api/get?user_mail=christopherglood%40gmail.com&mode=find&start_date=2025-01-25&end_date=2025-01-26",
+  {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    return data;
+  })
+  .catch((error) => console.error("Error:", error));
 ---
 
 <Layout>
@@ -21,7 +27,7 @@ const tasks = [
   >
     <div class="flex flex-col gap-4 my-auto max-h-screen">
       {
-        tasks.map((task) => (
+        tasks.map((task: any) => (
           <div
             style="background-color:#25262B;"
             class="max-h-fit flex flex-row justify-between gap-4 rounded-3xl p-6 hover:shadow-xl transition-shadow duration-500 ease-in-out"

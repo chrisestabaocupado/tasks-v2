@@ -1,6 +1,5 @@
 import { defineMiddleware } from "astro/middleware";
 import { getSession } from "auth-astro/server";
-/* import { getSession } from "auth-astro/server"; */
 import { verifyConnection, initializeMongo } from "./models/mongoose.utils";
 let mongoIsConnected = false;
 

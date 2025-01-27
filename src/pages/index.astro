@@ -2,20 +2,20 @@
 import Layout from "src/layouts/Layout.astro";
 import Footer from "src/components/settings/Footer.astro";
 import Modal from "src/components/settings/Modal.astro";
+const cookies: any = Astro.request.headers.get("cookie");
 let tasks: any = await fetch(
   "http://localhost:4321/api/get?user_mail=christopherglood%40gmail.com&mode=find&start_date=2025-01-25&end_date=2025-01-26",
   {
     method: "GET",
-    credentials: "include",
     headers: {
       "Content-Type": "application/json",
+      Cookie: cookies,
     },
   }
 )
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
-    return data;
+    return data.result;
   })
   .catch((error) => console.error("Error:", error));
 ---

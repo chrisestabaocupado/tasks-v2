@@ -14,9 +14,7 @@ export const GET: APIRoute = async ({ url, request }) => {
   let created_at = undefined;
   if (start_date && end_date) {
     start_date = new Date(start_date);
-    end_date = new Date(
-      add(start_date, { days: 1, hours: 23, minutes: 59, seconds: 59 })
-    );
+    end_date = new Date(add(end_date, { hours: 23, minutes: 59, seconds: 59 }));
     created_at = { $gte: start_date, $lt: end_date };
   }
   // query object

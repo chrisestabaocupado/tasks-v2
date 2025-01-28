@@ -10,7 +10,6 @@ export const onRequest = defineMiddleware(async (context: any, next: any) => {
     uri.pathname.split("/")[2] !== "auth"
   ) {
     const session: any = await getSession(context.request);
-    console.log(session);
     switch (!session) {
       case true:
         return new Response(

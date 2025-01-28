@@ -8,7 +8,7 @@ export class Habit {
   habit_title: string;
 
   @IsString()
-  describe: string;
+  habit_description: string;
 
   @IsDate()
   created_at: Date;
@@ -24,7 +24,7 @@ export class Habit_Record {
   habit_title: string;
 
   @IsString()
-  describe: string;
+  habit_description: string;
 
   @IsDate()
   created_at: Date;
@@ -35,7 +35,7 @@ export class Habit_Record {
 const habits_schema = new mongoose.Schema({
   user_mail: { type: String, required: true },
   habit_title: { type: String, required: true },
-  describe: { type: String, required: false },
+  habit_description: { type: String, required: false },
   created_at: { type: Date, required: false },
   updated_at: { type: Date, required: false },
 });

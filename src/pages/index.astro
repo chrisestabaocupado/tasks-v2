@@ -1,10 +1,15 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-import Footer from "src/components/settings/Footer.astro";
-import Modal from "src/components/settings/Modal.astro";
+import IndexFooter from "src/components/settings/IndexFooter.astro";
+import SettingsModal from "src/components/settings/SettingsModal.astro";
+import HabitCard from "src/components/habits/HabitCard.astro";
+import { getSession } from "auth-astro/server";
+// getting cookies and session
 const cookies: any = Astro.request.headers.get("cookie");
+const session = await getSession(Astro.request);
+// fetching tasks
 let tasks: any = await fetch(
-  "http://localhost:4321/api/get?user_mail=christopherglood%40gmail.com&mode=find&start_date=2025-01-25&end_date=2025-01-26",
+  `http://localhost:4321/api/get?user_mail=${session?.user?.email}&mode=find&start_date=1900-01-21&end_date=2025-01-27`,
   {
     method: "GET",
     headers: {
@@ -28,21 +33,15 @@ let tasks: any = await fetch(
     <div class="flex flex-col gap-4 my-auto max-h-screen">
       {
         tasks.map((task: any) => (
-          <div
-            style="background-color:#25262B;"
-            class="max-h-fit flex flex-row justify-between gap-4 rounded-3xl p-6 hover:shadow-xl transition-shadow duration-500 ease-in-out"
-          >
-            <button class="w-fit">
-              <i class="ti ti-circle text-2xl text-white hover:text-green-400 transition-colors ease-in-out duration-100" />
-            </button>
-            <div class="w-full">
-              <h1 class="text-gray-300 text-lg">{task.title}</h1>
-            </div>
-          </div>
+          <HabitCard
+            title={task.habit_title}
+            habit_description={task.habit_description}
+            key={task._id}
+          />
         ))
       }
     </div>
-    <Footer />
-    <Modal />
+    <IndexFooter />
+    <SettingsModal />
   </main>
 </Layout>

@@ -22,7 +22,10 @@ let tasks: any = await fetch(
   .then((data) => {
     return data.result;
   })
-  .catch((error) => console.error("Error:", error));
+  .catch((error) => {
+    console.error("Error:", error);
+    return [];
+  });
 ---
 
 <Layout>
